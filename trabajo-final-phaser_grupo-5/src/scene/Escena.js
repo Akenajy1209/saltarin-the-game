@@ -31,9 +31,20 @@ class Escena extends Phaser.Scene {
         this.load.spritesheet('dude',
             'img/dude.png',
             { frameWidth: 32, frameHeight: 48 });
+
+        this.load.audio('corte','sounds/corte.wav')
+        this.load.audio('gameOver','sounds/gameOver.wav')
+        this.load.audio('jump','sounds/jump.wav')
+        this.load.audio('coins','sounds/coins.wav')
     }
 
     create() {
+
+        // agregando sonidos
+        this.corte = this.sound.add("corte");
+        this.gameOver = this.sound.add("gameOver");
+        this.jump = this.sound.add("jump");
+        this.coins = this.sound.add("coins");
 
         // creando el fondo
         this.add.image(635, 50, 'sky').setScale(1,1.2);
@@ -151,6 +162,7 @@ class Escena extends Phaser.Scene {
         // saltar
         if (this.cursors.up.isDown && this.player.body.touching.down) {
             this.player.setVelocityY(-500);
+            this.jump.play();
         }
    
         //MOVIMIENTO DE PLATAFORMAS
@@ -217,15 +229,18 @@ class Escena extends Phaser.Scene {
         player.setTint(0xff0000);
         //this.gameOver = true;
         this.showGameOver();
+        this.corte.play();
     }
     collectStars(player, star) {
         this.score += 10;
         this.scoreText.setText('Score: ' + this.score);
         this.posRandom=Phaser.Math.Between(1, 6);
+        this.coins.play();
     }
     // Escena de Game Over
     showGameOver() {
         this.scene.start('gameover');
+        this.gameOver.play();
     }
 
     // Escena de Game Over
