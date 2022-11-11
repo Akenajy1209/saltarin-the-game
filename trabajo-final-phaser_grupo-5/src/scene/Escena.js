@@ -80,7 +80,7 @@ class Escena extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // agragamos el texto
-        this.scoreText = this.add.text(16, 30, 'Score: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(16, 40, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         //SUELO BASE
         this.grass0 = this.physics.add.image(600, 400, 'grass').setScale(0.5).setImmovable(true);
@@ -236,6 +236,9 @@ class Escena extends Phaser.Scene {
         this.scoreText.setText('Score: ' + this.score);
         this.posRandom=Phaser.Math.Between(1, 6);
         this.coins.play();
+        if(this.score >= 350){
+            this.showCongratulations();
+        }
     }
     // Escena de Game Over
     showGameOver() {

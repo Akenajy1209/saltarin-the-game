@@ -12,6 +12,7 @@ class Congratulations extends Phaser.Scene {
     preload() {
 
         // Carga una imagen. Los parametros son el nombre y la direccion
+        this.load.image('winner', '../img/won.jpg');
         this.load.image('win', '../img/win.png');
         this.restartButton.preload();
 
@@ -20,7 +21,7 @@ class Congratulations extends Phaser.Scene {
     create() {
 
         // Fondo
-        this.add.image(400, 300, 'fondo');
+        this.add.image(600, 300, 'winner').setScale(0.5);
         this.restartButton.create();
         this.winImage = this.add.image(740, 440, 'win');
 

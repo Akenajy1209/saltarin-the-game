@@ -11,7 +11,7 @@ class RestartButton {
 
     create() {
 
-        this.startButton = this.relatedScene.add.image(400, 440, 'restart').setInteractive();
+        this.startButton = this.relatedScene.add.image(1000, 440, 'restart').setScale(2).setInteractive();
 
         this.startButton.on('pointerdown', () => {
             this.relatedScene.scene.start('game');
