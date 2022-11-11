@@ -20,6 +20,9 @@ class Escena extends Phaser.Scene {
     star=null;
     score=0;
 
+    init(){
+        this.score=0;
+    }
     preload() {
 
         this.load.image('sky', 'img/mountains.png');

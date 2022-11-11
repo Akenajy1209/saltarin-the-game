@@ -11,7 +11,7 @@ class StartButton {
 
     create() {
 
-        this.startButton = this.relatedScene.add.image(600, 300, 'start').setInteractive();
+        this.startButton = this.relatedScene.add.image(600,400, 'start').setInteractive();
 
         this.startButton.on('pointerdown', () => {
             this.relatedScene.scene.start('game');

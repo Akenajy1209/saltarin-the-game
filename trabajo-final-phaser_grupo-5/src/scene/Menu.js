@@ -21,7 +21,7 @@ class Menu extends Phaser.Scene {
 
         // Carga una imagen. Los parametros son el nombre y la direccion
         this.load.image('background2', 'img/sceneMenu.jpg');
-        
+        this.load.image('logo', 'img/Menu1.png');
         this.StartButton.preload();
         this.OptionsButton.preload();
         this.PauseButton.preload();
@@ -32,9 +32,9 @@ class Menu extends Phaser.Scene {
 
         // Fondo
         this.add.image(635, 300, 'background2').setScale(0.8,0.6);
+        this.add.image(635, 200, 'logo').setScale(0.7);
         this.StartButton.create();
         this.OptionsButton.create();
-        this.PauseButton.create();
         /*StartButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         StartButton.reset();*/
 

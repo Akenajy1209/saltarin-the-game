@@ -11,7 +11,7 @@ class OptionsButton {
 
     create() {
 
-        this.startButton = this.relatedScene.add.image(600, 420, 'options').setInteractive();
+        this.startButton = this.relatedScene.add.image(600, 460, 'options').setInteractive();
 
         this.startButton.on('pointerdown', () => {
             this.relatedScene.scene.start('menu');
