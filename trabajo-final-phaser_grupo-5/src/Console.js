@@ -1,7 +1,9 @@
 // import React from 'react';
 import Phaser from 'phaser';
 import { useState, useEffect } from 'react';
-import Escena from './components/Escena';
+import Escena from './scene/Escena';
+import GameOver from './scene/GameOver';
+import Congratulations from './scene/Congratulations';
 
 function Console() {
 
@@ -19,7 +21,7 @@ function Console() {
           debug: false
         }
       },
-      scene: [Escena]
+      scene: [Escena, GameOver, Congratulations]
     };
 
     // Arranca el juego 
