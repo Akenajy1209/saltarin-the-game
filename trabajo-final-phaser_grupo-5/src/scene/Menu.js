@@ -22,8 +22,6 @@ class Menu extends Phaser.Scene {
         this.add.image(635, 300, 'background2').setScale(0.8,0.6);
         this.add.image(635, 200, 'logo').setScale(0.7);
         this.OptionsButton.create();
-        /*StartButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        StartButton.reset();*/
     }
     
 }

@@ -6,22 +6,6 @@ class Escena extends Phaser.Scene {
     constructor() {
         super({ key: 'game-2' });
     }
-    player = null;
-    cursors = null;
-    grass0 = null;
-    grass1 = null;
-    grass2 = null;
-    grass3 = null;
-    grass4 = null;
-    speed0 = null;
-    speed1 = null;
-    spikes = null;
-    spikes1 = null;
-    spikes2 = null;
-    posRandom=1;
-    star=null;
-    score=0;
-
     init(){
         this.score=0;
     }
@@ -114,9 +98,9 @@ class Escena extends Phaser.Scene {
         this.grass6.body.setAllowGravity(false);
 
         //velocidades
-        this.speed0 = Phaser.Math.GetSpeed(900, 10);
-        this.speed1 = Phaser.Math.GetSpeed(900, 5);
-        this.speed2 = Phaser.Math.GetSpeed(600, 4);
+        this.speed0 = Phaser.Math.GetSpeed(900, 10); // funcion de phaser para recorrer 900px en 10 segundos
+        this.speed1 = Phaser.Math.GetSpeed(900, 5); // funcion de phaser para recorrer 900px en 5 segundos
+        this.speed2 = Phaser.Math.GetSpeed(600, 4); // funcion de phaser para recorrer 600px en 4 segundos
 
         //coliision con jugador
         this.physics.add.collider(this.player, this.grass0, this.movePlayer, null, this);
@@ -199,7 +183,7 @@ class Escena extends Phaser.Scene {
 
    
         //MOVIMIENTO DE PLATAFORMAS
-        this.grass0.x += this.speed0 * delta;
+        this.grass0.x += this.speed0 * delta;   //cambia la posicion X de la plataforma de forma constante em direccion horizontal 
         this.grass1.x -= this.speed1 * delta;
         this.grass2.x -= this.speed1 * delta;
         this.grass3.x -= this.speed1 * delta;
@@ -207,11 +191,11 @@ class Escena extends Phaser.Scene {
         this.grass5.x += this.speed1 * delta;
         this.grass6.x += this.speed1 * delta;
 
-        if (this.grass0.x > 1200) {
-            this.grass0.x = 0;
+        if (this.grass0.x > 1200) {// si la posicion de la plataforma sobrepasa el limite lateral derecho
+            this.grass0.x = 0;   // vuelve al lateral izquierdo de la pantalla
         }
-        if (this.grass1.x < -50) {
-            this.grass1.x = 1300;
+        if (this.grass1.x < -50) {  // si la posicion de la plataforma sobrepasa el limite lateral izquierdo
+            this.grass1.x = 1300;   // vuelve al lateral derecho de la pantalla
         }
         if (this.grass2.x < -50) {
             this.grass2.x = 1300;
@@ -222,14 +206,15 @@ class Escena extends Phaser.Scene {
         if (this.grass4.x < -50) {
             this.grass4.x = 1300;
         }
-        if (this.grass5.x > 1300) {
-            this.grass5.x = -50;
+        if (this.grass5.x > 1300) { // si la posicion de la plataforma sobrepasa el limite lateral derecho
+            this.grass5.x = -50;    // vuelve al lateral izquierdo de la pantalla
         }
-        if (this.grass6.x > 1300) {
-            this.grass6.x = -50;
+        if (this.grass6.x > 1300) { // si la posicion de la plataforma sobrepasa el limite lateral derecho
+            this.grass6.x = -50;    // vuelve al lateral izquierdo de la pantalla
         }
 
         //POSICIONAMIENTO DE ESTRELLA
+        //Dependiendo del valor de posRandom, la estrella se ubicara en un sobre una plataforma en especifico
         if(this.posRandom===1){
             this.star.x=this.grass1.x;
             this.star.y=this.grass1.y-50;
@@ -256,7 +241,10 @@ class Escena extends Phaser.Scene {
         }
 
     };
-    movePlayer(player,plataform){
+    //FUNCIONES
+
+    //Estas 3 funciones sirven para simular el desplazamiento del jugador junto con la plataforma en movimiento
+    movePlayer(player,plataform){ 
         player.x += 1.5;
     }
     movePlayerTwo(player,plataform){
@@ -265,29 +253,32 @@ class Escena extends Phaser.Scene {
     movePlayerThree(player,plataform){
         player.x += 3;
     }
+
+    //Esta funcion sirve para determinar el comportamiento del jugador al chocar con un pincho
     hitSpikes(player) {
-        //this.physics.pause();
         player.setTint(0xff0000);
-        //this.gameOver = true;
         this.showGameOver();
         this.corte.play();
     }
+
+    //Esta funcion determina el comportamiento de las estrellas al sobreponerse con el jugador
     collectStars(player, star) {
         this.score += 10;
         this.scoreText.setText('Score: ' + this.score);
-        this.posRandom=Phaser.Math.Between(1, 6);
+        this.posRandom=Phaser.Math.Between(1, 6); //se asignara un nuevo valor de forma aleatoria entre 1 y 6
         this.coins.play();
-        if(this.score >= 350){
-            this.showCongratulations();
+        if(this.score >= 50){ // si el puntaje es igual o mayor a 350
+            this.showCongratulations();  // llama a la funcion 
         }
     }
-    // Escena de Game Over
+    
+    // FUNCION GAME OVER (al llamarla se reprducira la escena de juego perdido)
     showGameOver() {
         this.scene.start('gameover');
         this.gameOver.play();
     }
 
-    // Escena de Game Over
+    // FUNCION WINNER (al llamarla se reprducira la escena de juego ganado)
     showCongratulations() {
         this.scene.start('congratulations');
     }

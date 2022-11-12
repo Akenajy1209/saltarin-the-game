@@ -7,7 +7,6 @@ class GameOver extends Phaser.Scene {
     constructor(props) {
         super({ key: 'gameover' });
         this.restartButton = new RestartButton(this);
-
     }
 
     preload() {
