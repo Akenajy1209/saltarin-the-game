@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import StartButton from '../components/StartButton';
 import RestartButton from '../components/RestartButton';
 
 class Congratulations extends Phaser.Scene {
@@ -6,6 +7,7 @@ class Congratulations extends Phaser.Scene {
     // Se usará como palabra clave para usar la escena
     constructor() {
         super({ key: 'congratulations' });
+        this.StartButton = new StartButton(this);
         this.restartButton = new RestartButton(this);
     }
 
@@ -14,8 +16,17 @@ class Congratulations extends Phaser.Scene {
         // Carga una imagen. Los parametros son el nombre y la direccion
         this.load.image('winner', '../img/won.jpg');
         this.load.image('win', '../img/win.png');
-        this.restartButton.preload();
 
+        if(this.nivelActual === "nivel-1"){
+            let nivel = "nivel-2";
+            sessionStorage.setItem("nivelActual",nivel);
+            this.StartButton.preload();
+        }
+        if(this.nivelActual === "nivel-2"){
+            let nivel = "nivel-1";
+            sessionStorage.setItem("nivelActual",nivel);
+            this.restartButton.preload();
+        }
     }
 
     create() {

@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { useState, useEffect } from 'react';
 import Menu from './scene/Menu';
 import Escena from './scene/Escena';
+import EscenaTwo from './scene/Escena-2';
 import GameOver from './scene/GameOver';
 import Congratulations from './scene/Congratulations';
 
@@ -22,7 +23,7 @@ function Console() {
           debug: false
         }
       },
-      scene: [Menu, Escena, GameOver, Congratulations]
+      scene: [Menu,Escena,EscenaTwo, GameOver, Congratulations]
     };
 
     // Arranca el juego 

@@ -7,6 +7,7 @@ class RestartButton {
     preload() {
 
         this.relatedScene.load.image('restart', '../img/restart.png');
+        this.nivelActual = sessionStorage.getItem("nivelActual");
     }
 
     create() {
@@ -14,7 +15,12 @@ class RestartButton {
         this.startButton = this.relatedScene.add.image(1000, 440, 'restart').setScale(2).setInteractive();
 
         this.startButton.on('pointerdown', () => {
-            this.relatedScene.scene.start('game');
+            
+            if(this.nivelActual === "nivel-1"){
+                this.relatedScene.scene.start('game');
+            }else if(this.nivelActual === "nivel-2"){
+                this.relatedScene.scene.start('game-2');
+            }
         });
     }
     
