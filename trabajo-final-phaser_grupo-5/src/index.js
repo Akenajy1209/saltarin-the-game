@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Console from './Console';
+import Juego from './knightJump/Juego';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Console />
+    <Juego />
 );

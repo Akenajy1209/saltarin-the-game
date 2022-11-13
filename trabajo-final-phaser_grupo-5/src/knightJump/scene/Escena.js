@@ -6,6 +6,7 @@ class Escena extends Phaser.Scene {
     constructor() {
         super({ key: 'game' });
     }
+
     player = null;
     cursors = null;
     grass0 = null;
@@ -16,29 +17,30 @@ class Escena extends Phaser.Scene {
     speed0 = null;
     speed1 = null;
     spikes = null;
-    posRandom=1;
-    star=null;
-    score=0;
+    posRandom = 1;
+    star = null;
+    score = 0;
 
-    init(){
-        this.score=0;
+    init() {
+        this.score = 0;
     }
+
     preload() {
 
-        this.load.image('sky', 'img/mountains.png');
-        this.load.image('ground', 'img/platform.png');
-        this.load.image('grass', 'img/grass.png');
-        this.load.image('spikes', 'img/spikes.png');
-        this.load.image('spikes2', 'img/spikes2.png');
-        this.load.image('star', 'img/star.png');
+        this.load.image('sky', 'img/knightJump/mountains.png');
+        this.load.image('ground', 'img/knightJump/platform.png');
+        this.load.image('grass', 'img/knightJump/grass.png');
+        this.load.image('spikes', 'img/knightJump/spikes.png');
+        this.load.image('spikes2', 'img/knightJump/spikes2.png');
+        this.load.image('star', 'img/knightJump/star.png');
         this.load.spritesheet('dude',
-            'img/dude.png',
+            'img/knightJump/dude.png',
             { frameWidth: 32, frameHeight: 48 });
 
-        this.load.audio('corte','sounds/corte.wav')
-        this.load.audio('gameOver','sounds/gameOver.wav')
-        this.load.audio('jump','sounds/jump.wav')
-        this.load.audio('coins','sounds/coins.wav')
+        this.load.audio('corte', 'sounds/knightJump/corte.wav')
+        this.load.audio('gameOver', 'sounds/knightJump/gameOver.wav')
+        this.load.audio('jump', 'sounds/knightJump/jump.wav')
+        this.load.audio('coins', 'sounds/knightJump/coins.wav')
     }
 
     create() {
@@ -50,7 +52,7 @@ class Escena extends Phaser.Scene {
         this.coins = this.sound.add("coins");
 
         // creando el fondo
-        this.add.image(635, 50, 'sky').setScale(1,1.2);
+        this.add.image(635, 50, 'sky').setScale(1, 1.2);
 
         ///PLAYER
         this.player = this.physics.add.sprite(600, 250, 'dude');
@@ -80,9 +82,6 @@ class Escena extends Phaser.Scene {
         // rebote contra las plataformas
         this.physics.add.collider(this.player, this.grass);
         this.cursors = this.input.keyboard.createCursorKeys();
-
-        // agragamos el texto
-        this.scoreText = this.add.text(16, 40, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         //SUELO BASE
         this.grass0 = this.physics.add.image(600, 400, 'grass').setScale(0.5).setImmovable(true);
@@ -124,12 +123,12 @@ class Escena extends Phaser.Scene {
             key: ['spikes2', 'spikes'],
             frameQuantity: 19,
             gridAlign: {
-                width: 19, 
-                height: 2, 
-                cellWidth: 60, 
+                width: 19,
+                height: 2,
+                cellWidth: 60,
                 cellHeight: 561,
-                x: 30,       
-                y: 282       
+                x: 30,
+                y: 282
             }
         });
         //colision
@@ -140,6 +139,9 @@ class Escena extends Phaser.Scene {
         this.star.body.setAllowGravity(false);
         //colision
         this.physics.add.overlap(this.player, this.star, this.collectStars, null, this);
+
+        // agragamos el texto
+        this.scoreText = this.add.text(1000, 45, 'Puntos: 0', { fontSize: '30px', fill: '#2A33F0' });
     }
 
     update(time, delta) {
@@ -162,7 +164,7 @@ class Escena extends Phaser.Scene {
             this.player.setVelocityY(-500);
             this.jump.play();
         }
-   
+
         //MOVIMIENTO DE PLATAFORMAS
 
         this.grass0.y += this.speed0 * delta; //cambia la posicion Y de la plataforma de forma constante hacia abajo
@@ -175,7 +177,7 @@ class Escena extends Phaser.Scene {
 
         if (this.grass0.y > 600) {// si la posicion de la plataforma sobrepasa el limite inferior
             this.grass0.y = 0;     // vuelve a la parte superior de la pantalla
-            
+
         }
         if (this.grass1.y < -50) {// si la posicion de la plataforma sobrepasa el limite superior
             this.grass1.y = 650; // vuelve a la parte inferior de la pantalla
@@ -198,29 +200,29 @@ class Escena extends Phaser.Scene {
 
         //POSICIONAMIENTO DE ESTRELLA
         //Dependiendo del valor de posRandom, la estrella se ubicara en un sobre una plataforma en especifico
-        if(this.posRandom===1){
-            this.star.x=this.grass1.x;
-            this.star.y=this.grass1.y-50;
+        if (this.posRandom === 1) {
+            this.star.x = this.grass1.x;
+            this.star.y = this.grass1.y - 50;
         }
-        if(this.posRandom===2){
-            this.star.x=this.grass2.x;
-            this.star.y=this.grass2.y-50;
+        if (this.posRandom === 2) {
+            this.star.x = this.grass2.x;
+            this.star.y = this.grass2.y - 50;
         }
-        if(this.posRandom===3){
-            this.star.x=this.grass3.x;
-            this.star.y=this.grass3.y-50;
+        if (this.posRandom === 3) {
+            this.star.x = this.grass3.x;
+            this.star.y = this.grass3.y - 50;
         }
-        if(this.posRandom===4){
-            this.star.x=this.grass4.x;
-            this.star.y=this.grass4.y-50;
+        if (this.posRandom === 4) {
+            this.star.x = this.grass4.x;
+            this.star.y = this.grass4.y - 50;
         }
-        if(this.posRandom===5){
-            this.star.x=this.grass5.x;
-            this.star.y=this.grass5.y-50;
+        if (this.posRandom === 5) {
+            this.star.x = this.grass5.x;
+            this.star.y = this.grass5.y - 50;
         }
-        if(this.posRando===6){
-            this.star.x=this.grass6.x;
-            this.star.y=this.grass6.y-50;
+        if (this.posRando === 6) {
+            this.star.x = this.grass6.x;
+            this.star.y = this.grass6.y - 50;
         }
 
     };
@@ -228,21 +230,22 @@ class Escena extends Phaser.Scene {
     //Esta funcion sirve para determinar el comportamiento del jugador al chocar con un pincho
     hitSpikes(player) {
         player.setTint(0xff0000);
-        this.showGameOver(); 
+        this.showGameOver();
         this.corte.play();
     }
 
     //Esta funcion determina el comportamiento de las estrellas al sobreponerse con el jugador
     collectStars(player, star) {
-        this.score += 10; 
+        this.score += 10;
         this.scoreText.setText('Score: ' + this.score);
-        this.posRandom=Phaser.Math.Between(1, 6);   //se asignara un nuevo valor de forma aleatoria entre 1 y 6
+        this.posRandom = Phaser.Math.Between(1, 6);   //se asignara un nuevo valor de forma aleatoria entre 1 y 6
         this.coins.play();
-         
-        if(this.score >= 350){// si el puntaje es igual o mayor a 350
+
+        if (this.score >= 350) {// si el puntaje es igual o mayor a 350
             this.showCongratulations(); // llama a la funcion 
         }
     }
+
     // FUNCION GAME OVER (al llamarla se reprducira la escena de juego perdido)
     showGameOver() {
         this.scene.start('gameover');
@@ -253,6 +256,7 @@ class Escena extends Phaser.Scene {
     showCongratulations() {
         this.scene.start('congratulations');
     }
+
 }
 
 export default Escena;

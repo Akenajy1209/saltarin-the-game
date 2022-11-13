@@ -11,17 +11,18 @@ class Menu extends Phaser.Scene {
     nivelActual=null;
     
     preload() {
+        
         // Carga una imagen. Los parametros son el nombre y la direccion
-        this.load.image('background2', 'img/sceneMenu.jpg');
-        this.load.image('logo', 'img/Menu1.png');
+        this.load.image('background', 'img/knightJump/inicio.png');
         this.OptionsButton.preload();
+
     }
     create() {
 
         // Fondo
-        this.add.image(635, 300, 'background2').setScale(0.8,0.6);
-        this.add.image(635, 200, 'logo').setScale(0.7);
+        this.add.image(600, 300, 'background').setScale(0.8,0.6);
         this.OptionsButton.create();
+        
     }
     
 }

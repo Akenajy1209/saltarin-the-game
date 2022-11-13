@@ -12,23 +12,18 @@ class GameOver extends Phaser.Scene {
     preload() {
 
         // Carga una imagen. Los parametros son el nombre y la direccion
-        this.load.image('background', 'img/gameOver1.png');
-        this.load.image('Over', '../img/GameOver.png');
-        this.load.image('gameOver', '../img/gameOver2.png');
+        this.load.image('gameOver', 'img/knightJump/gameOver1.png');
+        this.load.image('Over', 'img/knightJump/GameOver.png');
         this.restartButton.preload();
 
     }
 
     create() {
-        
+
         // Fondo
-        this.add.image(635, 300, 'background').setScale(0.6,0.3);
+        this.add.image(635, 300, 'gameOver').setScale(0.6, 0.3);
         this.add.image(300, 140, 'Over').setScale(1.8);
-        // agragamos el texto
-        //this.scoreText = this.add.text(16, 30, 'Score: 0', { fontSize: '32px', fill: '#000' });
-        //this.scoreText.setText('Score: ' + this.score);
         this.restartButton.create();
-        this.gameoverImage = this.add.image(240, 350, 'gameOver');
 
     }
 

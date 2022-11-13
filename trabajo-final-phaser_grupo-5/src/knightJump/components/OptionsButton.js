@@ -6,14 +6,14 @@ class OptionsButton {
 
     preload() {
 
-        this.relatedScene.load.image('options', '../img/1.png');
-        this.relatedScene.load.image('options2', '../img/2.png');
+        this.relatedScene.load.image('options', 'img/knightJump/1.png');
+        this.relatedScene.load.image('options2', 'img/knightJump/2.png');
     }
 
     create() {
 
-        this.optionButton = this.relatedScene.add.image(450, 460, 'options').setInteractive();
-        this.optionButtonTwo = this.relatedScene.add.image(650, 460, 'options2').setInteractive();
+        this.optionButton = this.relatedScene.add.image(500, 460, 'options').setInteractive();
+        this.optionButtonTwo = this.relatedScene.add.image(700, 460, 'options2').setInteractive();
 
         this.optionButton.on('pointerdown', () => {//al presionar el boton
             let nivel="nivel-1";
